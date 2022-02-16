@@ -1,0 +1,108 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0 25px;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+/* .photo-card {
+
+} */
+img {
+  display: block;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.info {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  width: 100%;
+  height: 60px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.photo-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(173, 173, 173, 0);
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(173, 173, 173, 0);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.photo-card:hover {
+  transform: scale(1.03);
+}
+
+.load-more {
+  display: block;
+  margin: 150px auto;
+  width: 200px;
+  height: 80px;
+  border: none;
+  border-radius: 10px;
+  background-image: linear-gradient(217deg, rgba(235, 137, 137, 0.8), rgba(246, 65, 65, 0) 50.71%),
+    linear-gradient(127deg, rgba(91, 214, 91, 0.8), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(336deg, rgba(108, 108, 202, 0.8), rgba(0, 0, 255, 0) 70.71%);
+  font-size: 24px;
+  color: white;
+  font-weight: 500;
+
+  -webkit-box-shadow: 0px 10px 13px -7px #413b3b, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: 0px 10px 13px -7px #413b3b, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+}
+.hidden {
+  display: none;
+}
+.search-form {
+  margin: 50px auto;
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  width: 500px;
+  height: 50px;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px 20px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.search-form button {
+  margin-left: 10px;
+  display: block;
+  border: none;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(173, 173, 173, 0);
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(173, 173, 173, 0);
+  font-size: 24px;
+  font-weight: 500;
+  color: white;
+}
