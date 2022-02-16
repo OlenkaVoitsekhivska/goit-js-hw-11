@@ -9,11 +9,13 @@ export default class ImgApi {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+
   }
     
   async  fetchImg() {
     try {
       const imgs = await axios.get(`${API_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`);
+
       if (!imgs.data.totalHits) {
         Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
       }
@@ -27,7 +29,15 @@ export default class ImgApi {
     }
 
   }
-    async  fetchImgAgain() {
+
+  async hits() {
+      const hits = await axios.get(`${API_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`);
+      return hits.data.totalHits;
+  }
+
+
+
+  async  fetchImgAgain() {
     try {
       const imgs = await axios.get(`${API_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`);
 
@@ -42,7 +52,7 @@ export default class ImgApi {
       console.log(error);
     }
 
-}
+  }
 
   incrementPage() {
     this.page += 1;
@@ -51,6 +61,7 @@ export default class ImgApi {
   resetPage() {
     this.page = 1;
   }
+
 
 
   get query() {

@@ -47,25 +47,37 @@ function lemmeFetchMyImgs() {
             containerRef.insertAdjacentHTML('beforeend', markUp(data));
             let lightbox = new SimpleLightbox('.gallery a', { scrollZoom: false, captionDelay: 250, captionsData: 'alt', doubleTapZoom: 1 });
             lightbox.refresh();
-            loadMoreBtn.classList.remove("hidden");
             imgApi.incrementPage();
+            smooth();
+            imgApi.hits().then(res => {
+              if (res > 40) {
+                loadMoreBtn.classList.remove("hidden");
+              }
+            }).catch(err=>console.log(err));
         }
     })
 };
 
 function lemmeFetchMyImgsAgain() {
     imgApi.fetchImgAgain().then(data => {
-        if (data.length===0) {
-          Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
+      if (data.length === 0) {
           loadMoreBtn.classList.add("hidden");
+          Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
         }
         else {
             loadMoreBtn.classList.add("hidden");
             containerRef.insertAdjacentHTML('beforeend', markUp(data));
             let lightbox = new SimpleLightbox('.gallery a', { scrollZoom: false, captionDelay: 250, captionsData: 'alt', doubleTapZoom: 1 });
             lightbox.refresh();
-            loadMoreBtn.classList.remove("hidden");
+            imgApi.hits().then(res => {
+              if (res > 40) {
+                loadMoreBtn.classList.remove("hidden");
+                res -= 40;
+              }
+            }).catch(err=>console.log(err));
+ 
             imgApi.incrementPage();
+            smooth();
         }
     })
 };
@@ -77,6 +89,17 @@ function clearСontainerRef() {
 
 
 
+function smooth() {
+
+  const { height: cardHeight } = 
+    document.querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
+}
 
 
 
