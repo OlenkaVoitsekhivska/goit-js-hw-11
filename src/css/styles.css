@@ -42,6 +42,7 @@ p {
   align-items: center;
 }
 .photo-card {
+  height: 300px;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
