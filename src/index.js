@@ -45,7 +45,8 @@ function lemmeFetchMyImgs() {
             containerRef.innerHTML = markUp(data);
             let lightbox = new SimpleLightbox('.gallery a', { scrollZoom: false, captionDelay: 250, captionsData: 'alt', doubleTapZoom: 1 });
             lightbox.refresh();
-            loadMoreBtn.classList.remove("hidden");
+          loadMoreBtn.classList.remove("hidden");
+          imgApi.incrementPage();
         }
     })
 };
