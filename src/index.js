@@ -21,6 +21,7 @@ loadMoreBtn.addEventListener('click', lemmeFetchMyImgsAgain);
 
 function onSearch(e) {
   e.preventDefault();
+
   imgApi.query = inputRef.value;
 
   if (imgApi.query === '') {
@@ -30,6 +31,7 @@ function onSearch(e) {
   imgApi.resetPage();
   clearСontainerRef();
   lemmeFetchMyImgs();
+  
 }
 
 
@@ -42,11 +44,11 @@ function lemmeFetchMyImgs() {
         }
         else {
             loadMoreBtn.classList.add("hidden");
-            containerRef.innerHTML = markUp(data);
+            containerRef.insertAdjacentHTML('beforeend', markUp(data));
             let lightbox = new SimpleLightbox('.gallery a', { scrollZoom: false, captionDelay: 250, captionsData: 'alt', doubleTapZoom: 1 });
             lightbox.refresh();
-          loadMoreBtn.classList.remove("hidden");
-          imgApi.incrementPage();
+            loadMoreBtn.classList.remove("hidden");
+            imgApi.incrementPage();
         }
     })
 };
@@ -59,13 +61,11 @@ function lemmeFetchMyImgsAgain() {
         }
         else {
             loadMoreBtn.classList.add("hidden");
-            containerRef.innerHTML = markUp(data);
+            containerRef.insertAdjacentHTML('beforeend', markUp(data));
             let lightbox = new SimpleLightbox('.gallery a', { scrollZoom: false, captionDelay: 250, captionsData: 'alt', doubleTapZoom: 1 });
             lightbox.refresh();
             loadMoreBtn.classList.remove("hidden");
             imgApi.incrementPage();
-     
-        
         }
     })
 };
