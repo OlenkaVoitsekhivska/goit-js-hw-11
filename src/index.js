@@ -41,7 +41,6 @@ function lemmeFetchMyImgs() {
    if(totalHits===0) {
           loadMoreBtn.classList.add("hidden");
           Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-          return;
         }
    else {
           Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
@@ -59,29 +58,27 @@ function lemmeFetchMyImgs() {
     })
 };
 
+
+
 function lemmeFetchMyImgsAgain() {
   imgApi.fetchImgAgain().then(({ hits, totalHits }) => {
-    
-    if (totalHits===0) {
-        loadMoreBtn.classList.add("hidden");
-        Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
-        return;
-        }
+   
+    if (totalHits === 0) {
+      loadMoreBtn.classList.add("hidden");
+      Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
+    }
     else {
-        loadMoreBtn.classList.add("hidden");
-        containerRef.insertAdjacentHTML('beforeend', markUp(hits));
-        let lightbox = new SimpleLightbox('.gallery a', { scrollZoom: false, captionDelay: 250, captionsData: 'alt', doubleTapZoom: 1 });
-        lightbox.refresh();
-        if (totalHits > 40) { 
-              loadMoreBtn.classList.remove("hidden");
-              totalHits -= 40;
-                  if (totalHits < 40) {
-                      loadMoreBtn.classList.add("hidden");
-                      Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
-                  }
-        } 
-        imgApi.incrementPage();
-        smooth();
+      containerRef.insertAdjacentHTML('beforeend', markUp(hits));
+      let lightbox = new SimpleLightbox('.gallery a', { scrollZoom: false, captionDelay: 250, captionsData: 'alt', doubleTapZoom: 1 });
+      lightbox.refresh();
+      loadMoreBtn.classList.remove("hidden");
+      let numberOfPages = totalHits / 40;
+          if (imgApi.page === Math.ceil(numberOfPages)) {
+                loadMoreBtn.classList.add("hidden");
+                Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
+          }       
+      imgApi.incrementPage();
+      smooth();
     }
   })
 };

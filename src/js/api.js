@@ -33,6 +33,7 @@ export default class ImgApi {
       else {
        return imgs.data;
       }
+
     }
     catch (error){
       console.log(error);
